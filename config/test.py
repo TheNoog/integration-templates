@@ -36,13 +36,18 @@ SETTINGS = tomllib.loads(SETTINGS_TOML)
 from enum import Enum
 # class Settings(Enum):
 
+
+def import_arguments() -> dict:
+    parser = argparse.ArgumentParser(description='Collecting arguments...')
+    parser.add_argument('-k', '--kwargs', nargs='*', action=ParseKwargs)
+    return parser.parse_args().kwargs
+
+
 class Settings:
     '''
     Note: enumeration members must be constants. If something is missing it will throw an error on the missing item.
     '''
-    parser = argparse.ArgumentParser(description='Collecting arguments...')
-    parser.add_argument('-k', '--kwargs', nargs='*', action=ParseKwargs)
-    parameters = parser.parse_args().kwargs
+    parameters = import_arguments()
 
     MSSQL_CREDENTIALS_NAME = parameters['mssql_credentials_name']
     MSSQL_TABLE_NAME = parameters['mssql_table_name']
