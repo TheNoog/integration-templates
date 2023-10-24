@@ -1,0 +1,17 @@
+[package]
+name = "file_handler"
+version = "0.1.0"
+edition = "2021"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+polars = {version = "0.33.2", features = ["describe", "lazy", "ndarray", "polars-io"]}
+polars-io = { version = "0.33.2", features = ["parquet"] }
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary. Makes the compiled binary smaller.
+
+[[bin]]
+edition = "2021"
+name = "file_handler"
+path = "src/main.rs"

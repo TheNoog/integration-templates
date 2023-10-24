@@ -1,0 +1,33 @@
+[package]
+name = "etl"
+version = "0.1.0"
+edition = "2021"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary. Makes the compiled binary smaller.
+
+[[bin]]
+edition = "2021"
+name = "etl"
+path = "src/main.rs"
+
+[dependencies]
+# gcloud-sdk-rs -> https://github.com/abdolence/gcloud-sdk-rs/blob/master/README.md , https://github.com/abdolence/gcloud-sdk-rs/blob/master/gcloud-sdk/Cargo.toml#L22-L390
+gcloud-sdk = { version = "0.21.0", features = ["google-cloud-bigquery-v2", "google-cloud-secretmanager-v1", 
+    "google-storage-v2", "google-rest-bigquery-v2", "google-rest-storage-v1", "google-cloud-bigquery-storage-v1"] }
+
+
+# From secrets manager example.
+tokio = { version = "1.20", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version ="0.3", features = ["env-filter"] }
+futures = "0.3"
+bytes = "1.2"
+# From BQ example
+prost = "0.12"
+prost-types = "0.12"
+
+# polars = {version = "0.33.2", features = ["describe", "lazy", "ndarray", "polars-io"]}
+# polars-io = { version = "0.33.2", features = ["parquet"] }
+
