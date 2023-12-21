@@ -1,0 +1,16 @@
+[package]
+name = "csv_to_parquet"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+polars = {version = "0.33.2", features = ["describe", "lazy", "ndarray", "polars-io"]}
+polars-io = { version = "0.33.2", features = ["parquet"] }
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+
+[[bin]]
+edition = "2021"
+name = "csv_to_parquet_binary"
+path = "src/main.rs"
